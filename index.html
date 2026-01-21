@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NICONNECT — Arkadiusz Nikodem</title>
+  <meta name="description" content="Senior Oracle APEX / PL/SQL Developer — 11+ lat doświadczenia. Oracle APEX, PL/SQL, SQL tuning, ORDS/REST/JSON." />
+  <link rel="icon" href="assets/favicon.ico" />
+  <style>
+    :root{
+      --bg1:#041a22;
+      --bg2:#063040;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.04);
+      --border: rgba(255,255,255,.10);
+      --text: rgba(234,246,251,.92);
+      --muted: rgba(220,235,242,.72);
+      --accent:#22d3ee;
+      --accent2:#2dd4bf;
+      --shadow: 0 18px 40px rgba(0,0,0,.35);
+      --radius: 18px;
+      --radius2: 26px;
+      --container: 1100px;
+      --headerH: 86px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 20% 10%, rgba(34,211,238,.22), transparent 60%),
+        radial-gradient(900px 500px at 80% 25%, rgba(45,212,191,.18), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--container); margin:0 auto; padding:28px 18px 70px;}
+    header{
+      position:fixed !important;
+      top:0; left:0; right:0;
+      z-index:9999;
+      background: rgba(4,26,34,.55);
+      backdrop-filter: blur(14px);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav{
+      max-width:var(--container);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 18px;
+      gap:18px;
+    }
+    .brand{display:flex; align-items:center; gap:12px; min-width:210px}
+    .logo{
+      width:54px; height:54px; border-radius:999px;
+      box-shadow: 0 0 0 2px rgba(255,255,255,.08), 0 0 32px rgba(34,211,238,.20);
+      overflow:hidden;
+      flex:0 0 auto;
+    }
+    .logo img{width:100%; height:100%; object-fit:cover; display:block}
+    .brandtext{display:flex; flex-direction:column; line-height:1.05}
+    .brandtext b{letter-spacing:.18em; font-size:12px}
+    .brandtext span{font-size:12px; color:var(--muted); margin-top:6px}
+    nav{display:flex; align-items:center; gap:12px}
+    .navlink{
+      text-decoration:none;
+      padding:10px 14px;
+      border-radius:999px;
+      color:rgba(234,246,251,.85);
+      border:1px solid transparent;
+      transition:.18s ease;
+      font-weight:600;
+      font-size:14px;
+    }
+    .navlink:hover{border-color:rgba(255,255,255,.10); background:rgba(255,255,255,.05)}
+    .navlink.active{
+      background: rgba(255,255,255,.08);
+      border-color: rgba(34,211,238,.28);
+      box-shadow: 0 0 0 1px rgba(34,211,238,.08) inset;
+    }
+    .lang{display:flex; gap:10px; align-items:center}
+    .langbtn{
+      text-decoration:none;
+      font-weight:700;
+      font-size:13px;
+      padding:9px 12px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color:rgba(234,246,251,.86);
+      cursor:pointer;
+      user-select:none;
+    }
+    .langbtn.active{
+      border-color: rgba(34,211,238,.34);
+      background: rgba(34,211,238,.10);
+      color: rgba(234,246,251,.96);
+    }
+    .burger{
+      display:none;
+      width:44px; height:44px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color:rgba(234,246,251,.90);
+      cursor:pointer;
+    }
+    .mobile{
+      display:none;
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.35);
+      z-index:9998;
+      padding-top: calc(var(--headerH) + 12px);
+    }
+    .mobile.open{display:block}
+    .mobilePanel{
+      max-width:var(--container);
+      margin:0 auto;
+      padding:0 18px;
+    }
+    .mobileCard{
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      padding:14px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .gridHero{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:18px;
+      margin-top:18px;
+    }
+    .card{
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+      padding:26px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      letter-spacing:.16em;
+      font-size:12px;
+      color:rgba(234,246,251,.82);
+    }
+    .dot{width:9px; height:9px; border-radius:999px; background: var(--accent); box-shadow: 0 0 0 4px rgba(34,211,238,.12)}
+    h1{margin:14px 0 10px; font-size:56px; line-height:1.02}
+    .lead{color:var(--muted); font-size:16px; line-height:1.7; max-width:62ch}
+    .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
+    .chip{
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      font-size:13px;
+      font-weight:650;
+      color:rgba(234,246,251,.86);
+    }
+    .stats{display:flex; flex-direction:column; gap:14px}
+    .stat{
+      display:flex; gap:12px; align-items:flex-start;
+      padding:16px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .icon{
+      width:42px; height:42px; border-radius:14px;
+      display:grid; place-items:center;
+      background: rgba(34,211,238,.12);
+      border:1px solid rgba(34,211,238,.22);
+      font-weight:900;
+      color:rgba(234,246,251,.92);
+      flex: 0 0 auto;
+    }
+    .stat b{display:block; font-size:14px}
+    .stat small{display:block; color:var(--muted); margin-top:2px}
+    section{padding-top:24px}
+    .sectionTitle{font-size:26px; margin:0 0 8px}
+    .sectionSub{color:var(--muted); margin:0 0 18px}
+    ul{margin:10px 0 0 18px; color:rgba(234,246,251,.86); line-height:1.7}
+    .btnRow{display:flex; gap:12px; flex-wrap:wrap; margin-top:14px}
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      text-decoration:none;
+      font-weight:750;
+    }
+    .btn.primary{
+      background: rgba(34,211,238,.12);
+      border-color: rgba(34,211,238,.26);
+    }
+
+    @media (max-width: 980px){
+      .gridHero{grid-template-columns:1fr}
+      h1{font-size:44px}
+      nav{display:none}
+      .burger{display:inline-grid; place-items:center}
+      .brand{min-width:auto}
+    }
+  
+
+    /* Language visibility fallback (works even if JS fails to run) */
+    [data-lang]{display:none}
+    html[lang="pl"] [data-lang="pl"],
+    html[lang="en"] [data-lang="en"]{display:revert}
+</style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <div class="logo"><img src="assets/logo-ni-circle.png" alt="NICONNECT logo"></div>
+        <div class="brandtext">
+          <b>NICONNECT</b>
+          <span>Oracle APEX / PL/SQL</span>
+        </div>
+      </div>
+
+      <nav aria-label="Primary">
+        <a class="navlink" href="#start"><span data-lang="pl">Start</span><span data-lang="en">Start</span></a>
+        <a class="navlink" href="#experience"><span data-lang="pl">Doświadczenie</span><span data-lang="en">Experience</span></a>
+        <a class="navlink" href="#projects"><span data-lang="pl">Projekty</span><span data-lang="en">Projects</span></a>
+        <a class="navlink" href="#offer"><span data-lang="pl">Oferta</span><span data-lang="en">Offer</span></a>
+        <a class="navlink" href="#contact"><span data-lang="pl">Kontakt</span><span data-lang="en">Contact</span></a>
+      </nav>
+
+      <div class="lang" aria-label="Language">
+        <a class="langbtn" href="#" data-lang-switch="pl">PL</a>
+        <a class="langbtn" href="#" data-lang-switch="en">EN</a>
+      </div>
+
+      <button class="burger" data-burger aria-expanded="false" aria-label="Menu">☰</button>
+    </div>
+  </header>
+
+  <div class="mobile" data-mobile>
+    <div class="mobilePanel">
+      <div class="mobileCard">
+        <a class="navlink" href="#start"><span data-lang="pl">Start</span><span data-lang="en">Start</span></a>
+        <a class="navlink" href="#experience"><span data-lang="pl">Doświadczenie</span><span data-lang="en">Experience</span></a>
+        <a class="navlink" href="#projects"><span data-lang="pl">Projekty</span><span data-lang="en">Projects</span></a>
+        <a class="navlink" href="#offer"><span data-lang="pl">Oferta</span><span data-lang="en">Offer</span></a>
+        <a class="navlink" href="#contact"><span data-lang="pl">Kontakt</span><span data-lang="en">Contact</span></a>
+        <div class="btnRow">
+          <a class="langbtn" href="#" data-lang-switch="pl">PL</a>
+          <a class="langbtn" href="#" data-lang-switch="en">EN</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <section id="start" class="gridHero">
+      <div class="card">
+        <div class="pill"><span class="dot"></span><span data-lang="pl">SENIOR DEVELOPER</span><span data-lang="en">SENIOR DEVELOPER</span></div>
+        <h1>Arkadiusz Nikodem</h1>
+
+        <p class="lead" data-lang="pl">
+          Senior Oracle APEX / PL/SQL Developer z ponad 11-letnim doświadczeniem w projektowaniu, tworzeniu i utrzymaniu aplikacji bazodanowych klasy enterprise.
+          Specjalizacja: Oracle APEX, PL/SQL (pakiety, procedury, walidacje), optymalizacja SQL oraz integracje ORDS/REST/JSON.
+        </p>
+        <p class="lead" data-lang="en">
+          Senior Oracle APEX / PL/SQL Developer with 11+ years of experience designing, building and maintaining enterprise-grade database applications.
+          Focus areas: Oracle APEX, high-performance PL/SQL APIs (packages, procedures, validations), SQL tuning, and ORDS/REST/JSON integrations.
+        </p>
+
+        <div class="chips">
+          <span class="chip">Oracle APEX</span>
+          <span class="chip">PL/SQL</span>
+          <span class="chip">SQL Tuning</span>
+          <span class="chip">ORDS / REST</span>
+          <span class="chip">Oracle 12c / 19c</span>
+          <span class="chip">Agile</span>
+        </div>
+      </div>
+
+      <div class="card stats">
+        <div class="stat">
+          <div class="icon">11+</div>
+          <div>
+            <b data-lang="pl">Lat doświadczenia</b><b data-lang="en">Years of experience</b>
+            <small data-lang="pl">Projektowanie, rozwój i utrzymanie systemów opartych o Oracle DB i APEX.</small>
+            <small data-lang="en">Designing, delivering and maintaining Oracle DB & APEX solutions.</small>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="icon">APEX</div>
+          <div>
+            <b>Enterprise delivery</b>
+            <small data-lang="pl">Raporty, formularze, dashboardy, bezpieczeństwo, wydajność.</small>
+            <small data-lang="en">Reports, forms, dashboards, security and performance.</small>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="icon">API</div>
+          <div>
+            <b data-lang="pl">Integracje</b><b data-lang="en">Integrations</b>
+            <small>REST/JSON, ORDS, web services, DEV/TEST/PROD.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="card">
+        <h2 class="sectionTitle" data-lang="pl">Doświadczenie</h2>
+        <h2 class="sectionTitle" data-lang="en">Experience</h2>
+
+        <p class="sectionSub" data-lang="pl">Role i zakres odpowiedzialności (wybrane).</p>
+        <p class="sectionSub" data-lang="en">Selected roles and responsibilities.</p>
+
+        <h3 data-lang="pl">Senior Oracle APEX / PL/SQL Developer | 2019 – obecnie</h3>
+        <h3 data-lang="en">Senior Oracle APEX / PL/SQL Developer | 2019 – present</h3>
+        <ul data-lang="pl">
+          <li>Rozwój i utrzymanie aplikacji Oracle APEX wspierających procesy biznesowe (raporty, formularze, dashboardy).</li>
+          <li>Implementacja logiki biznesowej w PL/SQL (pakiety, procedury, funkcje, walidacje, warstwa API).</li>
+          <li>Integracje REST/JSON (ORDS), wymiana danych z systemami zewnętrznymi.</li>
+          <li>Wsparcie środowisk DEV/TEST/PROD, analiza incydentów, poprawa stabilności.</li>
+          <li>Optymalizacja zapytań i procesów (SQL tuning, refactoring).</li>
+        </ul>
+        <ul data-lang="en">
+          <li>Developing and maintaining Oracle APEX applications for business processes (reports, forms, dashboards).</li>
+          <li>Building PL/SQL business logic (packages, procedures, functions, validations, API layer).</li>
+          <li>REST/JSON integrations via ORDS; data exchange with external systems.</li>
+          <li>DEV/TEST/PROD support, incident analysis, stability improvements.</li>
+          <li>Query and process optimization (SQL tuning, refactoring).</li>
+        </ul>
+
+        <h3 data-lang="pl" style="margin-top:18px">Oracle Developer / PL/SQL Developer | 2013 – 2019</h3>
+        <h3 data-lang="en" style="margin-top:18px">Oracle Developer / PL/SQL Developer | 2013 – 2019</h3>
+        <ul data-lang="pl">
+          <li>Budowa rozwiązań Oracle DB dla systemów finansowych i raportowych.</li>
+          <li>ETL, przetwarzanie danych, procedury i funkcje, automatyzacje.</li>
+          <li>Obsługa incydentów produkcyjnych i poprawa wydajności krytycznych procesów.</li>
+        </ul>
+        <ul data-lang="en">
+          <li>Delivering Oracle DB solutions for financial and reporting systems.</li>
+          <li>ETL and data processing, procedures/functions, automation.</li>
+          <li>Production incident handling and performance improvements for critical jobs.</li>
+        </ul>
+      </div>
+    </section>
+
+    
+<section id="projects">
+      <div class="card">
+        <h2 class="sectionTitle" data-lang="pl">Projekty</h2>
+        <h2 class="sectionTitle" data-lang="en">Projects</h2>
+
+        <h3>NICONNECT AI Assistant</h3>
+        <p class="sectionSub" data-lang="pl"><b>AI chat w Oracle APEX</b> (Oracle Cloud Free Tier)</p>
+        <p class="sectionSub" data-lang="en"><b>AI chat built in Oracle APEX</b> (Oracle Cloud Free Tier)</p>
+
+        <p data-lang="pl">
+          Zbudowałem prototyp <b>NICONNECT AI Assistant</b> — lekki czat AI w stylu komunikatora, stworzony w Oracle APEX i uruchomiony w Oracle Cloud (Free Tier).
+          To fundament pod realne use‑case’y biznesowe: runbooki operacyjne, dokumentacja, baza wiedzy, podsumowania i tłumaczenia.
+        </p>
+        <p data-lang="en">
+          I built a prototype called <b>NICONNECT AI Assistant</b> — a lightweight messenger-like AI chat created in Oracle APEX and deployed on Oracle Cloud (Free Tier).
+          It’s a foundation for real business use cases: operational runbooks, documentation, knowledge base, summaries and translations.
+        </p>
+
+        <div class="btnRow" style="margin-top:14px">
+          <a class="btn primary" href="https://g5c4dfc3a7631bb-apexai.adb.eu-frankfurt-1.oraclecloudapps.com/ords/r/niconnect/niconnect-ai-assistant/home" target="_blank" rel="noreferrer">Live demo</a>
+          <a class="btn" href="https://www.linkedin.com/in/arkadiusz-nikodem-59b817167/" target="_blank" rel="noreferrer">LinkedIn</a>
+        </div>
+
+        <h4 style="margin-top:18px" data-lang="pl">Zastosowania biznesowe</h4>
+        <h4 style="margin-top:18px" data-lang="en">Business applications</h4>
+
+        <ul data-lang="pl">
+          <li>Checklisty operacyjne i runbooki (deployment, incident response, walidacje).</li>
+          <li>Asystent do wewnętrznej dokumentacji i procedur.</li>
+          <li>Copywriting / sugestie treści.</li>
+          <li>Szybkie tłumaczenia i podsumowania.</li>
+          <li>Chat do bazy wiedzy zespołu (kolejny krok: podłączenie danych firmowych).</li>
+        </ul>
+        <ul data-lang="en">
+          <li>Operational checklists and runbooks (deployments, incident response, validations).</li>
+          <li>Assistant for internal documentation and procedures.</li>
+          <li>Copywriting / content suggestions.</li>
+          <li>Fast translations and summaries.</li>
+          <li>Team knowledge-base chat (next step: connecting company data sources).</li>
+        </ul>
+      </div>
+    </section>
+
+
+<section id="offer">
+      <div class="card">
+        <h2 class="sectionTitle" data-lang="pl">Oferta</h2>
+        <h2 class="sectionTitle" data-lang="en">Offer</h2>
+
+        <p data-lang="pl">
+          Intensywnie rozwijam się w obszarze praktycznego wykorzystania AI w biznesie — szczególnie tam, gdzie można szybko uzyskać realną wartość:
+          oszczędność czasu, standaryzacja działań i automatyzacja powtarzalnych zadań.
+        </p>
+        <p data-lang="en">
+          I focus on practical AI adoption in business — especially where value can be delivered fast:
+          time savings, standardized operations and automation of repetitive tasks.
+        </p>
+
+        <p data-lang="pl">
+          Jeśli rozważasz wdrożenie AI w Twojej firmie, chętnie pomogę przełożyć pomysł na konkretny plan działania.
+          Wspólnie przeanalizujemy procesy, wskażemy miejsca o największym potencjale automatyzacji i dobierzemy rozwiązanie,
+          które będzie bezpieczne, efektywne i dopasowane do Twojego środowiska.
+        </p>
+        <p data-lang="en">
+          If you’re considering AI in your organization, I can help turn the idea into a practical implementation plan.
+          We’ll analyze processes, identify the highest automation potential and select a solution that is secure,
+          efficient and tailored to your environment.
+        </p>
+
+        <p data-lang="pl">
+          Szczególnie interesują mnie wdrożenia w oparciu o <b>Oracle APEX / Oracle Database</b> oraz lekkie asystenty AI wspierające pracę zespołów
+          (runbooki operacyjne, dokumentacja, knowledge‑base, podsumowania i tłumaczenia).
+        </p>
+        <p data-lang="en">
+          I’m especially interested in solutions built on <b>Oracle APEX / Oracle Database</b> and lightweight AI assistants that support teams
+          (operational runbooks, documentation, knowledge base, summaries and translations).
+        </p>
+
+        <div class="divider" style="margin:18px 0"></div>
+
+        <h3 data-lang="pl">Usługi / zakres wsparcia</h3>
+        <h3 data-lang="en">Services</h3>
+
+        <ul data-lang="pl">
+          <li>Rozwój i utrzymanie aplikacji Oracle APEX (raporty, formularze, dashboardy).</li>
+          <li>Projektowanie i implementacja PL/SQL API (pakiety, walidacje, refactoring).</li>
+          <li>SQL performance tuning (analiza planów, indeksy, optymalizacje).</li>
+          <li>Integracje ORDS/REST/JSON, web services.</li>
+          <li>Wsparcie produkcji, stabilizacja i poprawa jakości.</li>
+        </ul>
+        <ul data-lang="en">
+          <li>Oracle APEX application development & maintenance (reports, forms, dashboards).</li>
+          <li>PL/SQL API design & implementation (packages, validations, refactoring).</li>
+          <li>SQL performance tuning (execution plans, indexing, optimizations).</li>
+          <li>ORDS/REST/JSON integrations and web services.</li>
+          <li>Production support, stabilization and quality improvements.</li>
+        </ul>
+      </div>
+    </section>
+
+<section id="contact">
+      <div class="card">
+        <h2 class="sectionTitle" data-lang="pl">Kontakt</h2>
+        <h2 class="sectionTitle" data-lang="en">Contact</h2>
+
+        <p class="sectionSub" data-lang="pl">Napisz do mnie — chętnie pomogę w projekcie Oracle APEX / PL/SQL lub przy wdrożeniach AI.</p>
+        <p class="sectionSub" data-lang="en">Drop me a message — I’ll be happy to help with Oracle APEX / PL/SQL projects or AI-assisted solutions.</p>
+
+        <div class="btnRow">
+          <a class="btn primary" href="mailto:anikodem@niconnect.pl">anikodem@niconnect.pl</a>
+          <a class="btn" href="https://www.linkedin.com/in/arkadiusz-nikodem-59b817167/" target="_blank" rel="noreferrer">LinkedIn</a>
+        </div>
+
+        <h3 style="margin-top:18px" data-lang="pl">Preferowane tematy</h3>
+        <h3 style="margin-top:18px" data-lang="en">Preferred topics</h3>
+        <ul data-lang="pl">
+          <li>Oracle APEX — rozwój i utrzymanie aplikacji</li>
+          <li>PL/SQL — API, pakiety, walidacje, refactoring</li>
+          <li>SQL performance tuning</li>
+          <li>Integracje ORDS/REST, JSON</li>
+        </ul>
+        <ul data-lang="en">
+          <li>Oracle APEX — application development & maintenance</li>
+          <li>PL/SQL — APIs, packages, validations, refactoring</li>
+          <li>SQL performance tuning</li>
+          <li>ORDS/REST, JSON integrations</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
