@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NICONNECT — Arkadiusz Nikodem</title>
   <meta name="description" content="Senior Oracle APEX / PL/SQL Developer — 11+ lat doświadczenia. Oracle APEX, PL/SQL, SQL tuning, ORDS/REST/JSON." />
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="NICONNECT — Arkadiusz Nikodem" />
+  <meta property="og:description" content="Senior Oracle APEX / PL/SQL Developer — 11+ lat doświadczenia. Oracle APEX, PL/SQL, SQL tuning, ORDS/REST/JSON." />
+  <meta property="og:image" content="assets/og-image.png" />
+  <meta property="og:url" content="https://www.niconnect.pl/" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="assets/favicon.ico" />
   <style>
     :root{
@@ -208,6 +215,44 @@
       border-color: rgba(34,211,238,.26);
     }
 
+    /* Projects tabs */
+    .tabbtn{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color:rgba(234,246,251,.88);
+      font-weight:800;
+      cursor:pointer;
+      transition:.18s ease;
+    }
+    .tabbtn:hover{background: rgba(255,255,255,.06)}
+    .tabbtn.active{
+      background: rgba(34,211,238,.10);
+      border-color: rgba(34,211,238,.30);
+      box-shadow: 0 0 0 1px rgba(34,211,238,.08) inset;
+    }
+    .projLabel{margin: 0 0 12px}
+    .projPill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      font-weight:800;
+      font-size:12px;
+      color:rgba(234,246,251,.86);
+    }
+
+    /* Hero call-to-actions */
+    .heroActions{margin-top:18px}
+    .btn.ghost{
+      background: rgba(255,255,255,.03);
+      border-color: rgba(255,255,255,.10);
+    }
+
     @media (max-width: 980px){
       .gridHero{grid-template-columns:1fr}
       h1{font-size:44px}
@@ -290,6 +335,16 @@
           <span class="chip">Oracle 12c / 19c</span>
           <span class="chip">Agile</span>
         </div>
+
+        <!-- CTA -->
+        <div class="btnRow heroActions">
+          <a class="btn primary" href="#contact" data-scroll-to="contact">
+            <span data-lang="pl">Skontaktuj się</span><span data-lang="en">Contact me</span>
+          </a>
+          <a class="btn ghost" href="#projects" data-scroll-to="projects">
+            <span data-lang="pl">Zobacz projekty</span><span data-lang="en">View projects</span>
+          </a>
+        </div>
       </div>
 
       <div class="card stats">
@@ -365,41 +420,108 @@
         <h2 class="sectionTitle" data-lang="pl">Projekty</h2>
         <h2 class="sectionTitle" data-lang="en">Projects</h2>
 
-        <h3>NICONNECT AI Assistant</h3>
-        <p class="sectionSub" data-lang="pl"><b>AI chat w Oracle APEX</b> (Oracle Cloud Free Tier)</p>
-        <p class="sectionSub" data-lang="en"><b>AI chat built in Oracle APEX</b> (Oracle Cloud Free Tier)</p>
-
-        <p data-lang="pl">
-          Zbudowałem prototyp <b>NICONNECT AI Assistant</b> — lekki czat AI w stylu komunikatora, stworzony w Oracle APEX i uruchomiony w Oracle Cloud (Free Tier).
-          To fundament pod realne use‑case’y biznesowe: runbooki operacyjne, dokumentacja, baza wiedzy, podsumowania i tłumaczenia.
-        </p>
-        <p data-lang="en">
-          I built a prototype called <b>NICONNECT AI Assistant</b> — a lightweight messenger-like AI chat created in Oracle APEX and deployed on Oracle Cloud (Free Tier).
-          It’s a foundation for real business use cases: operational runbooks, documentation, knowledge base, summaries and translations.
-        </p>
-
-        <div class="btnRow" style="margin-top:14px">
-          <a class="btn primary" href="https://g5c4dfc3a7631bb-apexai.adb.eu-frankfurt-1.oraclecloudapps.com/ords/r/niconnect/niconnect-ai-assistant/home" target="_blank" rel="noreferrer">Live demo</a>
-          <a class="btn" href="https://www.linkedin.com/in/arkadiusz-nikodem-59b817167/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <!-- Tabs: Self-development vs Commercial -->
+        <div class="tabs" role="tablist" aria-label="Projects tabs" style="margin: 10px 0 18px; display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="tabbtn active" type="button" role="tab" aria-selected="true" data-tab="self">
+            <span data-lang="pl">W ramach samorozwoju</span><span data-lang="en">Self-development projects</span>
+          </button>
+          <button class="tabbtn" type="button" role="tab" aria-selected="false" data-tab="commercial">
+            <span data-lang="pl">Projekty komercyjne</span><span data-lang="en">Commercial projects</span>
+          </button>
         </div>
 
-        <h4 style="margin-top:18px" data-lang="pl">Zastosowania biznesowe</h4>
-        <h4 style="margin-top:18px" data-lang="en">Business applications</h4>
+        <div class="tabpanels">
+          <!-- Self-development -->
+          <div class="tabpanel" data-panel="self">
+            <h3>NICONNECT AI Assistant</h3>
+            <p class="sectionSub" data-lang="pl"><b>AI chat w Oracle APEX</b> (Oracle Cloud Free Tier)</p>
+            <p class="sectionSub" data-lang="en"><b>AI chat built in Oracle APEX</b> (Oracle Cloud Free Tier)</p>
 
-        <ul data-lang="pl">
-          <li>Checklisty operacyjne i runbooki (deployment, incident response, walidacje).</li>
-          <li>Asystent do wewnętrznej dokumentacji i procedur.</li>
-          <li>Copywriting / sugestie treści.</li>
-          <li>Szybkie tłumaczenia i podsumowania.</li>
-          <li>Chat do bazy wiedzy zespołu (kolejny krok: podłączenie danych firmowych).</li>
-        </ul>
-        <ul data-lang="en">
-          <li>Operational checklists and runbooks (deployments, incident response, validations).</li>
-          <li>Assistant for internal documentation and procedures.</li>
-          <li>Copywriting / content suggestions.</li>
-          <li>Fast translations and summaries.</li>
-          <li>Team knowledge-base chat (next step: connecting company data sources).</li>
-        </ul>
+            <p data-lang="pl">
+              Zbudowałem prototyp <b>NICONNECT AI Assistant</b> — lekki czat AI w stylu komunikatora, stworzony w Oracle APEX i uruchomiony w Oracle Cloud (Free Tier).
+              To fundament pod realne use‑case’y biznesowe: runbooki operacyjne, dokumentacja, baza wiedzy, podsumowania i tłumaczenia.
+            </p>
+            <p data-lang="en">
+              I built a prototype called <b>NICONNECT AI Assistant</b> — a lightweight messenger-like AI chat created in Oracle APEX and deployed on Oracle Cloud (Free Tier).
+              It’s a foundation for real business use cases: operational runbooks, documentation, knowledge base, summaries and translations.
+            </p>
+
+            <div class="btnRow" style="margin-top:14px">
+              <a class="btn primary" href="https://g5c4dfc3a7631bb-apexai.adb.eu-frankfurt-1.oraclecloudapps.com/ords/r/niconnect/niconnect-ai-assistant/home" target="_blank" rel="noreferrer">Live demo</a>
+              <a class="btn" href="https://www.linkedin.com/in/arkadiusz-nikodem-59b817167/" target="_blank" rel="noreferrer">LinkedIn</a>
+            </div>
+
+            <h4 style="margin-top:18px" data-lang="pl">Zastosowania biznesowe</h4>
+            <h4 style="margin-top:18px" data-lang="en">Business applications</h4>
+            <ul data-lang="pl">
+              <li>Checklisty operacyjne i runbooki (deployment, incident response, walidacje).</li>
+              <li>Asystent do wewnętrznej dokumentacji i procedur.</li>
+              <li>Copywriting / sugestie treści.</li>
+              <li>Szybkie tłumaczenia i podsumowania.</li>
+              <li>Chat do bazy wiedzy zespołu (kolejny krok: podłączenie danych firmowych).</li>
+            </ul>
+            <ul data-lang="en">
+              <li>Operational checklists and runbooks (deployments, incident response, validations).</li>
+              <li>Assistant for internal documentation and procedures.</li>
+              <li>Copywriting / content suggestions.</li>
+              <li>Fast translations and summaries.</li>
+              <li>Team knowledge-base chat (next step: connecting company data sources).</li>
+            </ul>
+          </div>
+
+          <!-- Commercial projects -->
+          <div class="tabpanel" data-panel="commercial" hidden>
+            <div class="projLabel" aria-label="Enterprise label">
+              <span class="projPill">Enterprise • Banking/Finance</span>
+            </div>
+
+            <h3 data-lang="pl">System ewidencji zabezpieczeń kredytowych (Oracle APEX)</h3>
+            <h3 data-lang="en">Credit collateral registry system (Oracle APEX)</h3>
+            <p data-lang="pl">Aplikacja Oracle APEX wspierająca rejestrację, walidację i utrzymanie zabezpieczeń kredytowych w środowisku enterprise. Odpowiadałem za rozwój funkcjonalności (formularze, raporty, dashboardy), implementację reguł biznesowych w PL/SQL oraz optymalizację wydajności.</p>
+            <p data-lang="en">An Oracle APEX application supporting registration, validation and maintenance of credit collaterals in an enterprise environment. I delivered new features (forms, reports, dashboards), implemented PL/SQL business rules and optimized SQL performance.</p>
+            <ul data-lang="pl">
+              <li>APEX: formularze, raporty interaktywne, dashboardy, uprawnienia.</li>
+              <li>PL/SQL: pakiety, procedury, API, walidacje.</li>
+              <li>SQL tuning: indeksy, analiza planów wykonania, refactoring.</li>
+            </ul>
+            <ul data-lang="en">
+              <li>APEX: forms, interactive reports, dashboards, roles & security.</li>
+              <li>PL/SQL: packages, procedures, APIs, validations.</li>
+              <li>SQL tuning: indexing, execution plan analysis, refactoring.</li>
+            </ul>
+
+            <div class="divider" style="margin:18px 0"></div>
+
+            <h3 data-lang="pl">Hurtownia danych / procesy ETL (PL/SQL)</h3>
+            <h3 data-lang="en">Data processing / ETL workflows (PL/SQL)</h3>
+            <p data-lang="pl">Rozwój i utrzymanie procesów przetwarzania danych (ETL) oraz warstwy raportowej. Tworzyłem i optymalizowałem pakiety PL/SQL do walidacji, agregacji i procesów wsadowych, dbając o stabilność oraz wydajność przetwarzania.</p>
+            <p data-lang="en">Development and maintenance of ETL/data processing workflows and reporting layer. I created and optimized PL/SQL packages for validation, aggregation and nightly batch runs with a focus on reliability and performance.</p>
+            <ul data-lang="pl">
+              <li>Procesy wsadowe PL/SQL: logowanie, obsługa błędów, monitoring.</li>
+              <li>Optymalizacja długich zadań (wydajność, stabilność, refactoring).</li>
+            </ul>
+            <ul data-lang="en">
+              <li>PL/SQL batch processing: logging, error handling, monitoring.</li>
+              <li>Optimization of long-running jobs (performance, stability, refactoring).</li>
+            </ul>
+
+            <div class="divider" style="margin:18px 0"></div>
+
+            <h3 data-lang="pl">Integracje usług REST / automatyzacja przepływu danych</h3>
+            <h3 data-lang="en">REST integrations / data flow automation</h3>
+            <p data-lang="pl">Integracje aplikacji bazodanowych z systemami zewnętrznymi (REST/JSON). Przygotowywałem API po stronie bazy oraz integracje po stronie APEX/ORDS, dbając o bezpieczeństwo, obsługę błędów i wsparcie wdrożeń.</p>
+            <p data-lang="en">Integration of database applications with external systems using REST/JSON. I delivered database-side APIs and APEX/ORDS integrations with strong focus on security, error handling and deployment support.</p>
+            <ul data-lang="pl">
+              <li>ORDS endpointy, kontrola dostępu, obsługa błędów.</li>
+              <li>REST (GET/POST), przetwarzanie JSON (parsing/generowanie).</li>
+            </ul>
+            <ul data-lang="en">
+              <li>ORDS endpoints, access control, robust error handling.</li>
+              <li>REST (GET/POST), JSON parsing & generation.</li>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </section>
 

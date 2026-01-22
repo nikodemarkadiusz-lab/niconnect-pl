@@ -79,15 +79,32 @@
     if (href.startsWith('#')) setActiveById(href.slice(1));
   }));
 
-  // IntersectionObserver
+  // CTA / cards: ensure active highlight follows click navigation
+  Array.from(document.querySelectorAll('[data-scroll-to]')).forEach(el => {
+    el.addEventListener('click', (e) => {
+      const id = el.getAttribute('data-scroll-to');
+      if (!id) return;
+      // allow default anchor, but update active immediately
+      setActiveById(id);
+    });
+  });
+
+  // IntersectionObserver (robust): make sure the last section (Contact) can become active
   const io = new IntersectionObserver((entries) => {
     const visible = entries
       .filter(e => e.isIntersecting)
       .sort((a,b) => (b.intersectionRatio - a.intersectionRatio))[0];
     if (visible) setActiveById(visible.target.id);
-  }, { rootMargin: '-25% 0px -65% 0px', threshold: [0.15, 0.25, 0.4, 0.6] });
+  }, { rootMargin: `-${Math.max(20, Math.round(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--headerH')) || 86) + 10)}px 0px -55% 0px`, threshold: [0.12, 0.22, 0.35, 0.5] });
 
   sections.forEach(sec => io.observe(sec));
+
+  // Fallback: at the very bottom always highlight Contact
+  function handleBottomHighlight(){
+    const nearBottom = (window.innerHeight + window.scrollY) >= (document.body.scrollHeight - 6);
+    if (nearBottom) setActiveById('contact');
+  }
+  window.addEventListener('scroll', handleBottomHighlight, { passive: true });
 
   // ---- Mobile menu ----
   const burger = document.querySelector('[data-burger]');
@@ -119,5 +136,29 @@
     else if (sections[0]) setActiveById(sections[0].id);
   });
   window.addEventListener('resize', setHeaderOffset);
+
+  // ---- Projects tabs ----
+  function initProjectTabs(){
+    const tabBtns = Array.from(document.querySelectorAll('.tabbtn[data-tab]'));
+    const panels = Array.from(document.querySelectorAll('.tabpanel[data-panel]'));
+    if (!tabBtns.length || !panels.length) return;
+
+    function activate(tab){
+      tabBtns.forEach(btn => {
+        const isActive = btn.getAttribute('data-tab') === tab;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+      panels.forEach(p => {
+        const show = p.getAttribute('data-panel') === tab;
+        p.hidden = !show;
+      });
+    }
+
+    tabBtns.forEach(btn => btn.addEventListener('click', () => activate(btn.getAttribute('data-tab'))));
+    activate('self');
+  }
+
+  document.addEventListener('DOMContentLoaded', initProjectTabs);
 
 })();
